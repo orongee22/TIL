@@ -1,8 +1,12 @@
 package ver05;
 
+import util.Select;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import util.Util;
 
-public class PhoneInfoManage implements selectNum {
+public class PhoneInfoManage {
 	
 	final PhoneInfor[] pb;
 	int count;
@@ -28,15 +32,21 @@ public class PhoneInfoManage implements selectNum {
 	
 		// 친구정보 입력 메서드	
 		public void insert() {
+			System.out.println("정보를 저장할 카테고리를 입력하세요.");
 			
 			System.out.println("1. 대학");
 			System.out.println("2. 회사");
 			System.out.println("3. 동호회");
+			int select = 0;
 			
-			int select = Util.keyboard.nextInt();
-			Util.keyboard.nextLine();
+			try {
+				select = Util.keyboard.nextInt();
+				Util.keyboard.nextLine();
+				insertMember(select);
+			} catch(InputMismatchException e) {
+				System.out.println("값을 다시 입력하세요.");
+			}
 			
-			insertMember(select);
 		}
 		
 		public void insertMember(int select) {
@@ -62,7 +72,6 @@ public class PhoneInfoManage implements selectNum {
 				pi = new PhoneUnivInfo(name, phoneNumber, address, email, major, grade);
 				
 				
-				//인스턴스 생성
 			}else if(select == 2) {
 				System.out.println("회사명을 입력해주세요");
 				String company = Util.keyboard.nextLine();
@@ -72,11 +81,13 @@ public class PhoneInfoManage implements selectNum {
 				pi = new PhoneCompanyInfo(name, phoneNumber, company, email);
 						
 				
-			}else{
+			}else if(select == 3){
 				System.out.println("닉네임을 입력해주세요.");
 				String nickname = Util.keyboard.nextLine();
 				
 				pi = new PhoneCafeInfo(name, phoneNumber, nickname);				
+			} else {
+				System.out.println("해당 숫자만 입력할 수 있습니다.");
 			}
 			
 			// 배열 저장
@@ -112,7 +123,8 @@ public class PhoneInfoManage implements selectNum {
 			if(index<0) {
 				System.out.println("검색한 이름의 정보가 없습니다.");
 			} else {
-				pb[index].showData();
+				
+				pb[index].showBasicInfo();
 			}
 			
 		}
@@ -127,13 +139,21 @@ public class PhoneInfoManage implements selectNum {
 			if(index<0) {
 				System.out.println("검색하신 이름의 데이터가 존재하지 않습니다.");
 			} else {
-				for(int i=index;i<count-1;i++) {
-					pb[i] = pb[i+1];				
-				}
+				pb[index].showBasicInfo();
+				System.out.println("해당 이름의 주소를 삭제하시겠습니까?");
+				System.out.println("1. 예\n2. 아니오");
 				
-				// 저장된 사용자 정보의 개수가 감소
-				count--;
-				System.out.println("요청하신 이름의 정보를 삭제했습니다.");
+				int choice = Util.keyboard.nextInt();
+				
+				if(choice == 1) {
+					for(int i=index;i<count-1;i++) {
+						pb[i] = pb[i+1];	
+					}
+					System.out.println("삭제했습니다.");
+					count--;					
+				} else {
+					System.out.println("취소했습니다.");
+				}
 			}
 		}
 		public int searchIndex(String keyword) {
@@ -147,16 +167,47 @@ public class PhoneInfoManage implements selectNum {
 			}
 			return index;
 		}
+		public void modifyData() {
+			System.out.println("정보를 수정하고자 하는 사용자의 이름을 입력하세요.");
+			String name = Util.keyboard.nextLine();
+			
+			int index = searchIndex(name);
+			if(index<0) {
+				System.out.println("검색하신 이름의 데이터가 존재하지 않습니다.");
+			} else {
+				System.out.println("======================");
+				pb[index].showData();
+				System.out.println("======================");
+				System.out.println("수정하시겠습니까?");
+				System.out.println("1. 예\n2. 아니오");
+				int select = Util.keyboard.nextInt();
+				if(select == 1) {
+					insert();
+				} else {
+					System.out.println("취소했습니다.");
+				}
+				System.out.println("수정을 완료했습니다.");
+			}
+			
+		}
 		public int printMenu() {
 			System.out.println("---------------------------------");
 			System.out.println("사용할 메뉴의 번호를 선택해 주세요.");
-			System.out.printf("%d. 입력\n%d. 검색\n%d. 삭제\n%d. 전체 정보 출력\n5. 종료\n",INSERT,SEARCH,DELETE,PRINT,QUIT);
+			System.out.printf("%d. 입력\n%d. 검색\n%d. 삭제\n%d. 수정\n%d. 전체 정보 출력\n%d. 종료\n",Select.INSERT,Select.SEARCH,Select.DELETE,Select.MODIFY,Select.PRINT,Select.QUIT);
 			System.out.println("---------------------------------");
 			
-			int choice = Util.keyboard.nextInt();
-			Util.keyboard.nextLine();
+			int choice = 0;
 			
-			return choice;
+			try {
+				choice = Util.keyboard.nextInt();	
+				Util.keyboard.nextLine();
+				return choice;
+			} catch(InputMismatchException e) {
+				System.out.println("숫자만 입력할 수 있습니다. 값을 다시 입력하세요.");
+				Util.keyboard = new Scanner(System.in);
+				choice = Util.keyboard.nextInt();
+				return choice;
+			}
 		}
 	
 }
