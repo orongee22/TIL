@@ -88,11 +88,14 @@ index.js
 ```js
 // mobx의 provider를 불러오고!
 import {Provider} from 'mobx-react';
+import CounterStore from './stores/counter';
 
 // ....생략
 
+const store = new CounterStore(); // 스토어를 인스턴스로 생성함!
+
 ReactDOM.render(
-	<Provider counter={counter}>
+	<Provider counter={store}>
 		<App />
 	</Provider>
 	//...이하생략
@@ -105,7 +108,7 @@ src/Counter.js
 
 ```js
 import React, {Component} from 'react';
-import {observer, inject} from 'react-mobx';
+import {observer, inject} from 'mobx-react';
 
 @inject('counter') // 스토어명을 기입
 @observer
