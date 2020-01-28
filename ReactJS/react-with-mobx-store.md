@@ -14,8 +14,8 @@ get total(){
 	return this.number * this.number;
 }
 ```
-number의 값이 변경될 때마다 computed에 의해 `total()` 함수가 실행됨!
-갑자기 튀어나온 `get`에 대한 정보는 [여기서](https://github.com/orongee22/TIL/Javascript/es6-class-get) 확인쓰
+number의 값이 변경될 때마다 computed에 의해 `total()` 함수가 실행됨!<br>
+갑자기 튀어나온 `get`에 대한 정보는 [여기서](https://github.com/orongee22/TIL/blob/master/Javascript/es6-class-get.md) 확인쓰
 
 
 ### 여러 개의 store 사용하기
