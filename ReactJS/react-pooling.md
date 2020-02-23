@@ -15,12 +15,15 @@ const handleChange = useCallback((e) =>{
 이걸 방지하려면 `setLockFormData()`를 실행하기 전에 이벤트 객체 값들을 변수로 미리 할당한 뒤에 할당한 변수를 삽입하면 돔
 
 ```js
-const target = e.target.value;  
-const name = e.target.name;  
-setLockFormData( prevLockFormData =>  ({...prevLockFormData, [name] : target}));
+// const value = e.target.value;  
+// const name = e.target.name;  
+
+const {value, name} = e.target;
+
+setLockFormData( prevLockFormData =>  ({...prevLockFormData, [name] : value}));
 ```
 
-혹은 `event.persist()` 하나로도 간단히 방지가 가능함!
+혹은 `event.persist()` 하나로도 간단히 방지가 가능함. `event.persist()` 함수는 이벤트 객체를 유지시키는 함수. 기존에 이벤트를 비우는 방식과 다르기에 메모리를 많이 잡아먹기 때문에 성능상 문제가 생기므로 이 방법은 그닥 좋지 못함. 
 
 
 
