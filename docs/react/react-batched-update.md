@@ -1,4 +1,4 @@
-## React batched update
+# React batched update
 
 리액트는 기본적으로 batched update (일괄 업데이트) 방식을 따르고 있다. 
 `setState` 메소드는 비동기로 작동하여 state를 변경시킨다. 그러므로 연속적으로 호출할 경우 두번 연속 state가 바뀌길 기대하겠지만 No!

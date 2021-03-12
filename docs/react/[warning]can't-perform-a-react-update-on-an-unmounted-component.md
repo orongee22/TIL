@@ -1,4 +1,6 @@
-```console
+# [warning]can't-perform-a-react-update-on-an-unmounted-component
+
+```
 Warning: Can't perform a React state update on an unmounted component. 
 This is a no-op, but it indicates a memory leak in your application. 
 To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
@@ -10,7 +12,7 @@ To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup f
 
 이런 순서로 페이지 흐름이 이어지는데 다시 목록 페이지로 돌아왔을 때마다 에러가 발생했다.
 
-```jsx
+```js
   const createInfoData = useCallback(()=>{
     const sendData = async () =>{
       setLoaded(false);
@@ -61,7 +63,7 @@ To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup f
 
 일단 데이터가 성공적으로 응답을 받으면 `processResponse()`가 실행되는데
 
-```jsx
+```js
 const processResponse = useCallback((url, response)=>{
 
     // http response code
@@ -99,7 +101,7 @@ const processResponse = useCallback((url, response)=>{
 
 이미 `try` 구문에서 리스트 페이지 이동 함수가 실행되었으니, 현재 컴포넌트는 언마운트가 된다. 그런데 문제는 마지막 `finally` 의 존재였다ㅠㅠㅠ
 
-```jsx
+```js
 finally{
    setLoaded(true);
 }
