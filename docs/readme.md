@@ -1,4 +1,4 @@
-[![HitCount](http://hits.dwyl.com/orongee22/TIL/docs.svg)](http://hits.dwyl.com/orongee22/TIL/docs)
+[![HitCount](http://hits.dwyl.com/orongee22/TIL.svg)](http://hits.dwyl.com/orongee22/TIL)
 # Today I Learned 
 
 🤷‍♀️ 대충 오늘 배운 것들을 정리하겠다는 의미
