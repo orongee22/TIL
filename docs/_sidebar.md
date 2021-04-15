@@ -20,6 +20,7 @@
   * [BOM & DOM](javascript/js_BOM%20&%20DOM.md)
   * [[ES6] getter, setter](javascript/es6-class-get.md)
   * [Array method](javascript/array-method.md)
+  * [Debouncing](javascript/debouncing.md)
   
 * :book: Java
   * [자바 시작하기](java/Readme.md)
